@@ -9,7 +9,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class CartService {
   public cart = new BehaviorSubject<Cart>({ items:[] })
 
-  constructor(private _stackBar: MatSnackBar) { }
+  constructor(private _snackBar: MatSnackBar) { }
 
   addToCart(item: CartItem): void{
     const items = [...this.cart.value.items]
@@ -19,7 +19,19 @@ export class CartService {
     itemInCart ? itemInCart.quantity += 1 : items.push(item);
     
     this.cart.next({ items })
-    this._stackBar.open('1 item adicionado ao carrinho', 'Ok', { duration: 3000 })
-    console.log(this.cart.value)
+    this._snackBar.open('1 item adicionado ao carrinho', 'Ok', { duration: 3000 })
+  }
+
+  getFinalPrice(cartItems: CartItem[]): number {
+    const total = cartItems
+      .map((item)=> item.price * item.quantity)
+      .reduce((prev, current) => prev + current, 0);
+
+    return total
+  }
+
+  clearCart(): void {
+    this.cart.next({ items: [] })
+    this._snackBar.open('Carrinho está vazio', 'Ok', { duration: 3000 })
   }
 }
