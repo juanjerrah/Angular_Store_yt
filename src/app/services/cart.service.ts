@@ -19,6 +19,10 @@ export class CartService {
     itemInCart ? itemInCart.quantity += 1 : items.push(item);
     
     this.cart.next({ items })
+
+    const data = JSON.stringify(items)
+    localStorage.setItem('cart', data)
+
     this._snackBar.open('1 item adicionado ao carrinho', 'Ok', { duration: 3000 })
   }
 
@@ -34,4 +38,19 @@ export class CartService {
     this.cart.next({ items: [] })
     this._snackBar.open('Carrinho está vazio', 'Ok', { duration: 3000 })
   }
+
+  removeFromCart(item: CartItem): void{
+    const filteredItem = this.cart.value.items
+      .filter((_cartItem) => item.id !== _cartItem.id)
+    
+    this.cart.next({ items: filteredItem })
+
+    this._snackBar.open(`${item.name} foi removido`, 'Ok', { duration: 3000 })
+  }
+
+  removeItemQuantity(item: CartItem): void {
+    const filteredItem = this.cart.value.items
+      .filter((_cartItem) => item.id === _cartItem.id)
+  }
+
 }

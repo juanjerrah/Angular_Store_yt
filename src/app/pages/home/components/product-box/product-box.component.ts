@@ -17,7 +17,7 @@ export class ProductBoxComponent {
     price: 150.35,
     category: 'clothings',
     description: 'A cool snicker',
-    image:'https://via.placeholder.com/150'
+    image:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxGnhbmC9DEAOL8SHXuT4TtWFJ12Jjg1pYfg&usqp=CAU'
 
   }
   

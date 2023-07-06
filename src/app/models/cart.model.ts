@@ -1,13 +1,17 @@
-export interface Cart {
-    items: Array<CartItem>
+export class Cart {
+    public items: Array<CartItem>
+
+    constructor(items: Array<CartItem>) {
+        this.items = items   
+    }
 }
 
 export class CartItem{
     public id: number
-    product: string;
-    name: string;
-    price: number;
-    quantity: number;
+    public product: string;
+    public name: string;
+    public price: number;
+    public quantity: number;
 
     constructor(id: number,
         product: string,
